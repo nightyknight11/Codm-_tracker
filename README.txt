@@ -2,7 +2,7 @@ CODM Tracker — unofficial profile lookup edition
 
 What it does
 - Lets a player enter their CODM Global in-game nickname.
-- Uses a Netlify Function to query the community-maintained endpoint documented at https://github.com/Harry260/codm-api.
+- Uses a Netlify Function to query the Codashop player-validation endpoint directly (the same source the community codm-api at https://github.com/Harry260/codm-api used before it stopped working).
 - Displays only fields that endpoint documents: nickname, player level, Multiplayer rank/rating, and country.
 - Does NOT provide full MP K/D, win rate, total kills, match history, or BR stats. Those are shown as unavailable rather than fake values.
 

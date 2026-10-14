@@ -47,7 +47,7 @@ async function lookupPlayer(name){
     // Netlify Function proxies the request so the browser does not depend on the API's CORS settings.
     const response=await fetch(`/.netlify/functions/codm?name=${encodeURIComponent(name)}`);
     const payload=await response.json();
-    if(!response.ok) throw new Error(payload.error||`Request failed (${response.status})`);
+    if(!response.ok){const e=new Error(payload.error||`Request failed (${response.status})`);e.notFound=response.status===404;throw e}
     if(payload.success===false||!payload.data) throw new Error(payload.message||"Player not found or the API returned no profile.");
     const d=payload.data;
     setPlayerName(d.nickname||name);
@@ -61,7 +61,9 @@ async function lookupPlayer(name){
   }catch(err){
     document.getElementById("sourceStatus").textContent="LOOKUP FAILED";
     document.getElementById("profileMessage").textContent="Could not load a profile: "+(err.message||"unknown error")+". Check the nickname and try again later.";
-    showStatus("Lookup failed. If this site is not deployed with the Netlify Function, the API connection will not work.");
+    showStatus(err.notFound
+      ?"Player not found. Check that the nickname matches your in-game name exactly, including capital letters and symbols."
+      :"Lookup failed: "+(err.message||"unknown error")+". Please try again later.");
   }finally{button.disabled=false;button.textContent="Find player"}
 }
 form.addEventListener("submit",e=>{e.preventDefault();const name=input.value.trim();if(name)lookupPlayer(name)});
