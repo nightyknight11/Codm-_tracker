@@ -1,21 +1,20 @@
-CODM Tracker — unofficial profile lookup edition
+CODM Tracker — operator lookup
 
 What it does
-- Lets a player enter their CODM Global in-game nickname.
-- Uses a Netlify Function to query the community-maintained endpoint documented at https://github.com/Harry260/codm-api.
-- Displays only fields that endpoint documents: nickname, player level, Multiplayer rank/rating, and country.
-- Does NOT provide full MP K/D, win rate, total kills, match history, or BR stats. Those are shown as unavailable rather than fake values.
+- Search a CODM Global player by exact in-game nickname or by player UID.
+- Shows nickname, UID, avatar, region, player level, Multiplayer rank (with badge), MP rating and a ranked-ladder view.
+- Remembers your last 5 searches in your browser only.
+- Does NOT show K/D, wins, match history or Battle Royale stats: the data source doesn't provide them, so nothing is faked.
 
-Important limitations
-- This is an unofficial, reverse-engineered service. It may be unavailable, inaccurate, rate-limited, or change without notice.
-- The API documentation does not guarantee that every region or nickname will work.
-- A profile lookup is not a live match feed.
+How it works
+- netlify/functions/player.mjs (served at /api/player?q=...) asks Codashop's public CODM top-up validation endpoint for the player profile, following its region hint when a player belongs to another country.
+- This is unofficial and may change or stop working without notice.
 - Never enter your Activision password, OTP, or account cookies into this site.
 
-Deploying
-The site now needs a Netlify Function, so a plain static-only upload of index.html is NOT enough. Deploy the whole folder as a Netlify project with functions enabled. Easiest reliable method: put the folder contents in a GitHub repository, then in Netlify choose Add new site > Import an existing project and connect that repository. Netlify should detect netlify.toml and deploy netlify/functions/codm.js. You can do this from a phone browser.
+Making changes
+- The Netlify project deploys automatically from the main branch of the GitHub repo. Edit a file on GitHub (pencil icon > Commit changes) and the site updates in about a minute.
 
 Files
-- index.html: website
+- index.html: the whole website (design + search logic)
+- netlify/functions/player.mjs: server-side profile lookup
 - netlify.toml: tells Netlify where the function lives
-- netlify/functions/codm.js: server-side profile API proxy
