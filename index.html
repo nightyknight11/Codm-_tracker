@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b10">
+<title>CODM Tracker — Player Dashboard</title>
+<style>
+:root{color-scheme:dark;--bg:#090b10;--panel:#121722;--line:#283244;--text:#f4f6fb;--muted:#9ba7bb;--red:#ff4055;--cyan:#55e6ff;--green:#5ee6a8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% -10%,#28203e 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+header{height:74px;padding:0 clamp(16px,4vw,54px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090b10e8;backdrop-filter:blur(12px);z-index:2}.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.08em}.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--red),#852cff);font-size:24px;font-style:italic}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.2em;margin-top:3px}
+main{max-width:1150px;margin:auto;padding:34px clamp(16px,4vw,54px) 55px}.eyebrow{color:var(--red);font-size:11px;font-weight:900;letter-spacing:.22em}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:13px 0 22px}.hero h1{font-size:clamp(36px,6vw,61px);line-height:.98;letter-spacing:-.05em;margin:10px 0}.hero h1 span{color:var(--red)}.hero p{color:var(--muted);max-width:610px;line-height:1.65}.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(130deg,#171d2a,#10141d);padding:19px;margin:18px 0}.panel h2{font-size:17px;margin:0 0 7px}.muted{color:var(--muted);font-size:12px;line-height:1.6}.formrow{display:flex;gap:10px;margin-top:15px}.field{flex:1;min-width:0;background:#090c12;border:1px solid #30394a;border-radius:9px;padding:13px;color:var(--text);font:inherit;outline:none}.field:focus{border-color:var(--cyan)}button{font:inherit;font-weight:850;cursor:pointer;border:0;border-radius:9px;padding:12px 16px;background:var(--red);color:white}.secondary{background:transparent;border:1px solid var(--line);color:var(--text);padding:8px 11px}.profile{display:flex;align-items:center;gap:12px}.profileicon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#242d3d;color:var(--cyan);font-weight:900}.profile strong{display:block}.profile small{color:var(--muted);font-size:11px}.hidden{display:none!important}
+.notice{padding:14px 16px;background:#211b12;border:1px solid #59472b;border-radius:12px;color:#f5d9a6;font-size:12px;line-height:1.6;margin:18px 0}.notice strong{color:#ffe9bf}.tabs{display:flex;gap:8px;margin:25px 0 15px}.tab{border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--muted);padding:11px 17px}.tab.active{background:#38141d;border-color:#9f3041;color:white}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card{min-width:0;padding:18px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#171d29,#11151e)}.label{font-size:10px;color:var(--muted);font-weight:850;letter-spacing:.13em}.value{font-size:clamp(25px,3vw,36px);font-weight:950;letter-spacing:-.04em;margin:12px 0 5px}.sub{font-size:11px;color:var(--muted)}.cyan{color:var(--cyan)}.red{color:var(--red)}.twocol{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:14px}.sect{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.sect h3{margin:0;font-size:15px}.tag{border:1px solid var(--line);border-radius:6px;padding:5px 7px;color:var(--muted);font-size:9px;letter-spacing:.1em}.chart{height:145px;display:flex;align-items:flex-end;gap:10px;border-bottom:1px solid var(--line);padding:0 3px}.barcol{height:100%;display:flex;flex:1;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px}.bar{width:100%;max-width:36px;border-radius:5px 5px 0 0;background:linear-gradient(var(--red),#7e2130);min-height:5px}.barcol span{font-size:9px;color:var(--muted)}.rank{display:flex;align-items:center;gap:13px;background:#0c1018;border:1px solid var(--line);border-radius:12px;padding:14px}.rankicon{width:56px;height:56px;border-radius:13px;background:linear-gradient(135deg,#6d7589,#272e3d);display:grid;place-items:center;font-size:25px}.rank h4{margin:0 0 5px;font-size:16px}.rank p{margin:0;color:var(--muted);font-size:11px}.progress{height:6px;background:#2b3240;border-radius:99px;overflow:hidden;margin:16px 0 8px}.progress div{height:100%;width:64%;background:linear-gradient(90deg,var(--red),#ff9855)}.match{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.match:last-child{border:0}.match strong{font-size:12px;display:block}.match small{font-size:10px;color:var(--muted)}.result{font-size:9px;font-weight:900;border-radius:5px;padding:5px 7px}.win{color:var(--green);background:#12392c}.loss{color:#ff8996;background:#3a1922}footer{text-align:center;color:var(--muted);font-size:10px;line-height:1.7;margin-top:27px}
+@media(max-width:760px){.hero{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol{grid-template-columns:1fr}.formrow{flex-direction:column}header{height:68px}.brand{font-size:12px}}@media(max-width:380px){.card{padding:13px}.value{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">C</div><div>CODM <span style="color:var(--red)">TRACKER</span><small>PLAYER PERFORMANCE CENTER</small></div></div><div id="headerProfile" class="profile hidden"><div class="profileicon">C</div><div><strong id="headerName">Player</strong><small>Local demo profile</small></div><button class="secondary" id="changeName">Change</button></div></header>
+<main>
+<div class="eyebrow">GLOBAL VERSION / PLAYER ANALYTICS</div>
+<div class="hero"><div><h1>YOUR GAME.<br><span>YOUR NUMBERS.</span></h1><p>A dark esports dashboard for Call of Duty: Mobile Multiplayer and Battle Royale.</p></div></div>
+<section class="panel" id="loginPanel"><h2>Enter your CODM in-game name</h2><p class="muted">Looks up the public profile fields supported by an unofficial CODM Global profile API.</p><form id="nameForm" class="formrow"><input id="codmName" class="field" maxlength="40" autocomplete="nickname" placeholder="Your CODM username" required><button type="submit" id="lookupButton">Find player</button></form><p class="muted" style="margin-bottom:0">No password needed. Never enter your Activision password or verification codes here.</p><p id="status" class="muted" role="status" aria-live="polite"></p></section>
+<section class="panel hidden" id="playerPanel"><div class="profile"><div class="profileicon">C</div><div><h2 id="playerTitle" style="margin:0 0 4px">Player</h2><p class="muted" style="margin:0">CODM Global · public profile lookup</p></div></div></section>
+<div class="notice"><strong>What this can show:</strong> this unofficial API documents player level, MP rank, MP rating, country and nickname. It does not provide verified full MP lifetime stats or BR stats through this endpoint. Results may fail or be outdated if the service changes.</div>
+<section class="grid" aria-label="Player profile details">
+<div class="card"><div class="label">PLAYER LEVEL</div><div class="value cyan" id="level">—</div><div class="sub">From profile lookup</div></div>
+<div class="card"><div class="label">MP RANK</div><div class="value" id="mpRank">—</div><div class="sub">From profile lookup</div></div>
+<div class="card"><div class="label">MP RATING</div><div class="value red" id="rating">—</div><div class="sub">From profile lookup</div></div>
+<div class="card"><div class="label">COUNTRY</div><div class="value" id="country">—</div><div class="sub">From profile lookup</div></div>
+</section>
+<div class="twocol"><div class="card"><div class="sect"><h3>Multiplayer stats</h3><span class="tag">NOT PROVIDED</span></div><p class="muted">This API endpoint does not document K/D, win rate, total kills or match history. These will stay unavailable rather than showing made-up numbers.</p></div><div class="card"><div class="sect"><h3>Battle Royale stats</h3><span class="tag">NOT PROVIDED</span></div><p class="muted">BR stats are not available from this profile endpoint.</p></div></div>
+<div class="card" style="margin-top:14px"><div class="sect"><h3>Profile response</h3><span class="tag" id="sourceStatus">WAITING FOR LOOKUP</span></div><p class="muted" id="profileMessage">Enter your exact in-game nickname to try a profile lookup.</p><p class="muted">Data source: unofficial community API. It is not affiliated with Activision and may stop working.</p></div>
+<footer>Independent fan-made project. Not affiliated with Activision or Call of Duty.<br>Your display name is saved locally in this browser only. Profile data depends on an unofficial API.</footer>
+</main>
+<script>
+const form=document.getElementById("nameForm"),input=document.getElementById("codmName");
+const statusEl=document.getElementById("status"),button=document.getElementById("lookupButton");
+function showStatus(message){statusEl.textContent=message}
+function setPlayerName(name){document.getElementById("playerTitle").textContent=name;document.getElementById("headerName").textContent=name;document.getElementById("headerProfile").classList.remove("hidden");document.getElementById("loginPanel").classList.add("hidden");document.getElementById("playerPanel").classList.remove("hidden");try{localStorage.setItem("codmTrackerDisplayName",name)}catch(e){}}
+function setField(id,value){document.getElementById(id).textContent=(value===undefined||value===null||value==="")?"Unavailable":String(value)}
+async function lookupPlayer(name){
+  button.disabled=true;button.textContent="Looking up…";showStatus("Checking the public profile service…");
+  document.getElementById("sourceStatus").textContent="LOOKUP IN PROGRESS";
+  document.getElementById("profileMessage").textContent="Waiting for the API response…";
+  ["level","mpRank","rating","country"].forEach(id=>setField(id,null));
+  try{
+    // Netlify Function proxies the request so the browser does not depend on the API's CORS settings.
+    const response=await fetch(`/.netlify/functions/codm?name=${encodeURIComponent(name)}`);
+    const payload=await response.json();
+    if(!response.ok) throw new Error(payload.error||`Request failed (${response.status})`);
+    if(payload.success===false||!payload.data) throw new Error(payload.message||"Player not found or the API returned no profile.");
+    const d=payload.data;
+    setPlayerName(d.nickname||name);
+    setField("level",d.level);
+    setField("mpRank",d.customReadableMpRank);
+    setField("rating",d.rating);
+    setField("country",d.country);
+    document.getElementById("sourceStatus").textContent="PROFILE RECEIVED";
+    document.getElementById("profileMessage").textContent="Profile data received from the unofficial API. This is a profile lookup, not a live match feed.";
+    showStatus("Profile found. Full MP/BR statistics are not supplied by this endpoint.");
+  }catch(err){
+    document.getElementById("sourceStatus").textContent="LOOKUP FAILED";
+    document.getElementById("profileMessage").textContent="Could not load a profile: "+(err.message||"unknown error")+". Check the nickname and try again later.";
+    showStatus("Lookup failed. If this site is not deployed with the Netlify Function, the API connection will not work.");
+  }finally{button.disabled=false;button.textContent="Find player"}
+}
+form.addEventListener("submit",e=>{e.preventDefault();const name=input.value.trim();if(name)lookupPlayer(name)});
+document.getElementById("changeName").addEventListener("click",()=>{document.getElementById("loginPanel").classList.remove("hidden");document.getElementById("playerPanel").classList.add("hidden");input.value=document.getElementById("headerName").textContent;document.getElementById("headerProfile").classList.add("hidden")});
+try{const saved=localStorage.getItem("codmTrackerDisplayName");if(saved){input.value=saved;lookupPlayer(saved)}}catch(e){}
+</script>
+</body>
+</html>
