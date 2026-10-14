@@ -3,70 +3,266 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090b10">
-<title>CODM Tracker — Player Dashboard</title>
+<meta name="theme-color" content="#0b0d0a">
+<title>CODM Tracker — Operator Lookup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#090b10;--panel:#121722;--line:#283244;--text:#f4f6fb;--muted:#9ba7bb;--red:#ff4055;--cyan:#55e6ff;--green:#5ee6a8}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% -10%,#28203e 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
-header{height:74px;padding:0 clamp(16px,4vw,54px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090b10e8;backdrop-filter:blur(12px);z-index:2}.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.08em}.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--red),#852cff);font-size:24px;font-style:italic}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.2em;margin-top:3px}
-main{max-width:1150px;margin:auto;padding:34px clamp(16px,4vw,54px) 55px}.eyebrow{color:var(--red);font-size:11px;font-weight:900;letter-spacing:.22em}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:13px 0 22px}.hero h1{font-size:clamp(36px,6vw,61px);line-height:.98;letter-spacing:-.05em;margin:10px 0}.hero h1 span{color:var(--red)}.hero p{color:var(--muted);max-width:610px;line-height:1.65}.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(130deg,#171d2a,#10141d);padding:19px;margin:18px 0}.panel h2{font-size:17px;margin:0 0 7px}.muted{color:var(--muted);font-size:12px;line-height:1.6}.formrow{display:flex;gap:10px;margin-top:15px}.field{flex:1;min-width:0;background:#090c12;border:1px solid #30394a;border-radius:9px;padding:13px;color:var(--text);font:inherit;outline:none}.field:focus{border-color:var(--cyan)}button{font:inherit;font-weight:850;cursor:pointer;border:0;border-radius:9px;padding:12px 16px;background:var(--red);color:white}.secondary{background:transparent;border:1px solid var(--line);color:var(--text);padding:8px 11px}.profile{display:flex;align-items:center;gap:12px}.profileicon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#242d3d;color:var(--cyan);font-weight:900}.profile strong{display:block}.profile small{color:var(--muted);font-size:11px}.hidden{display:none!important}
-.notice{padding:14px 16px;background:#211b12;border:1px solid #59472b;border-radius:12px;color:#f5d9a6;font-size:12px;line-height:1.6;margin:18px 0}.notice strong{color:#ffe9bf}.tabs{display:flex;gap:8px;margin:25px 0 15px}.tab{border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--muted);padding:11px 17px}.tab.active{background:#38141d;border-color:#9f3041;color:white}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.card{min-width:0;padding:18px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#171d29,#11151e)}.label{font-size:10px;color:var(--muted);font-weight:850;letter-spacing:.13em}.value{font-size:clamp(25px,3vw,36px);font-weight:950;letter-spacing:-.04em;margin:12px 0 5px}.sub{font-size:11px;color:var(--muted)}.cyan{color:var(--cyan)}.red{color:var(--red)}.twocol{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:14px}.sect{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.sect h3{margin:0;font-size:15px}.tag{border:1px solid var(--line);border-radius:6px;padding:5px 7px;color:var(--muted);font-size:9px;letter-spacing:.1em}.chart{height:145px;display:flex;align-items:flex-end;gap:10px;border-bottom:1px solid var(--line);padding:0 3px}.barcol{height:100%;display:flex;flex:1;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px}.bar{width:100%;max-width:36px;border-radius:5px 5px 0 0;background:linear-gradient(var(--red),#7e2130);min-height:5px}.barcol span{font-size:9px;color:var(--muted)}.rank{display:flex;align-items:center;gap:13px;background:#0c1018;border:1px solid var(--line);border-radius:12px;padding:14px}.rankicon{width:56px;height:56px;border-radius:13px;background:linear-gradient(135deg,#6d7589,#272e3d);display:grid;place-items:center;font-size:25px}.rank h4{margin:0 0 5px;font-size:16px}.rank p{margin:0;color:var(--muted);font-size:11px}.progress{height:6px;background:#2b3240;border-radius:99px;overflow:hidden;margin:16px 0 8px}.progress div{height:100%;width:64%;background:linear-gradient(90deg,var(--red),#ff9855)}.match{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.match:last-child{border:0}.match strong{font-size:12px;display:block}.match small{font-size:10px;color:var(--muted)}.result{font-size:9px;font-weight:900;border-radius:5px;padding:5px 7px}.win{color:var(--green);background:#12392c}.loss{color:#ff8996;background:#3a1922}footer{text-align:center;color:var(--muted);font-size:10px;line-height:1.7;margin-top:27px}
-@media(max-width:760px){.hero{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol{grid-template-columns:1fr}.formrow{flex-direction:column}header{height:68px}.brand{font-size:12px}}@media(max-width:380px){.card{padding:13px}.value{font-size:24px}}
+:root{
+  color-scheme:dark;
+  --bg:#0b0d0a;--bg2:#12150f;--line:#2a2f24;--line2:#3b4232;
+  --ink:#ebe8dc;--dim:#8d927f;--faint:#5b6052;
+  --hot:#ff6a1a;--hot2:#ffb21a;--ok:#9be15d;--bad:#ff5a4f;
+  --display:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;
+  background-image:
+    linear-gradient(var(--bg) 0 0) padding-box,
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:auto,48px 48px,48px 48px;
+  background-blend-mode:normal;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 80% 0%,rgba(255,106,26,.13),transparent 70%),radial-gradient(ellipse 50% 40% at 0% 100%,rgba(155,225,93,.05),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);mix-blend-mode:multiply;opacity:.5}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px dashed var(--line2)}
+.mark{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;letter-spacing:.14em;font-size:15px}
+.mark svg{width:30px;height:30px}
+.mark b{color:var(--hot)}
+.live{font-size:11px;color:var(--dim);letter-spacing:.12em;display:flex;align-items:center;gap:8px}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+
+/* hero */
+.hero{padding:clamp(40px,8vw,84px) 0 28px}
+.tagline{font-size:11px;letter-spacing:.3em;color:var(--hot);margin-bottom:18px}
+.tagline::before{content:"// "}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(44px,9vw,104px);line-height:.88;letter-spacing:-.02em;margin:0;text-transform:uppercase}
+h1 .o{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+h1 .h{color:var(--hot)}
+.lede{max-width:520px;color:var(--dim);line-height:1.7;margin:22px 0 0}
+
+/* search */
+.search{margin-top:34px;display:flex;align-items:stretch;border:1px solid var(--line2);background:rgba(18,21,15,.85);transition:border-color .2s,box-shadow .2s}
+.search:focus-within{border-color:var(--hot);box-shadow:0 0 0 4px rgba(255,106,26,.12)}
+.prompt{display:grid;place-items:center;padding:0 16px;color:var(--hot);font-weight:600;border-right:1px solid var(--line)}
+.search input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);font:500 17px var(--mono);padding:20px 16px}
+.search input::placeholder{color:var(--faint)}
+.search button{font:700 14px var(--display);letter-spacing:.16em;text-transform:uppercase;border:0;cursor:pointer;background:var(--hot);color:#160a02;padding:0 28px;transition:background .15s}
+.search button:hover{background:var(--hot2)}
+.search button:disabled{background:var(--line2);color:var(--dim);cursor:wait}
+.hint{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:12px;font-size:11px;color:var(--faint)}
+.recent{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 11px var(--mono);color:var(--dim);background:none;border:1px solid var(--line);padding:4px 9px;cursor:pointer}
+.chip:hover{color:var(--ink);border-color:var(--hot)}
+
+/* states */
+.state{margin:34px 0;border:1px solid var(--line);padding:22px;font-size:13px;color:var(--dim);display:none}
+.state.show{display:block}
+.state.err{border-color:rgba(255,90,79,.4);color:#ffb3ad;background:rgba(255,90,79,.05)}
+.scan{position:relative;height:3px;background:var(--line);overflow:hidden;margin-top:14px}
+.scan::after{content:"";position:absolute;inset:0;width:30%;background:linear-gradient(90deg,transparent,var(--hot),transparent);animation:scan 1.1s linear infinite}
+@keyframes scan{from{transform:translateX(-100%)}to{transform:translateX(400%)}}
+
+/* dossier */
+.dossier{display:none;margin:34px 0 0;animation:rise .5s cubic-bezier(.2,.8,.2,1)}
+.dossier.show{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.frame{position:relative;border:1px solid var(--line2);background:linear-gradient(160deg,rgba(28,32,23,.92),rgba(14,16,12,.92))}
+.frame::before,.frame::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--hot)}
+.frame::before{top:-2px;left:-2px;border-right:0;border-bottom:0}
+.frame::after{bottom:-2px;right:-2px;border-left:0;border-top:0}
+.ribbon{display:flex;justify-content:space-between;gap:12px;padding:10px 18px;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.2em;color:var(--faint)}
+.ribbon .ok{color:var(--ok)}
+
+.id{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:28px}
+.avatar{width:96px;height:96px;border:1px solid var(--line2);background:var(--bg2) center/cover no-repeat;display:grid;place-items:center;font:700 40px var(--display);color:var(--hot);clip-path:polygon(0 0,82% 0,100% 18%,100% 100%,18% 100%,0 82%)}
+.who small{display:block;font-size:10px;letter-spacing:.24em;color:var(--faint);margin-bottom:6px}
+.who h2{font-family:var(--display);font-size:clamp(30px,5vw,52px);line-height:1;margin:0;word-break:break-word}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;border:1px solid var(--line);padding:5px 10px;color:var(--dim);background:none;font-family:var(--mono)}
+button.pill{cursor:pointer}
+button.pill:hover{border-color:var(--hot);color:var(--ink)}
+.badge{text-align:center}
+.badge img{width:120px;height:120px;object-fit:contain;filter:drop-shadow(0 6px 24px rgba(255,106,26,.35))}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.stat{padding:22px 28px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat .k{font-size:10px;letter-spacing:.22em;color:var(--faint)}
+.stat .v{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.5vw,46px);line-height:1.1;margin-top:8px;display:flex;align-items:center;gap:10px}
+.stat .v img{width:32px;height:32px}
+.stat .v.hot{color:var(--hot)}
+
+.ladder{padding:22px 28px 28px;border-top:1px solid var(--line)}
+.ladder .k{font-size:10px;letter-spacing:.22em;color:var(--faint);margin-bottom:14px}
+.tiers{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.tier{position:relative;padding-top:12px;font-size:10px;letter-spacing:.06em;color:var(--faint);text-transform:uppercase}
+.tier::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--line)}
+.tier.past::before{background:rgba(255,106,26,.45)}
+.tier.now{color:var(--ink);font-weight:600}
+.tier.now::before{background:var(--hot);box-shadow:0 0 14px var(--hot)}
+
+.limits{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.limit{border:1px dashed var(--line2);padding:16px 18px;font-size:12px;color:var(--dim);line-height:1.6}
+.limit b{display:block;font-family:var(--display);color:var(--ink);font-size:14px;letter-spacing:.06em;margin-bottom:4px}
+
+footer{margin:60px 0 40px;padding-top:18px;border-top:1px dashed var(--line2);font-size:11px;color:var(--faint);line-height:1.8}
+
+@media(max-width:720px){
+  .id{grid-template-columns:auto 1fr;padding:22px}
+  .badge{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:left;border-top:1px solid var(--line);padding-top:18px}
+  .badge img{width:72px;height:72px}
+  .avatar{width:72px;height:72px;font-size:30px}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid var(--line);padding:18px 22px}
+  .stat:last-child{border-bottom:0}
+  .ladder{padding:20px 22px 24px}
+  .tier{font-size:0}
+  .tier.now{font-size:10px;white-space:nowrap}
+  .limits{grid-template-columns:1fr}
+  .search button{padding:0 18px}
+  .prompt{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
-<header><div class="brand"><div class="logo">C</div><div>CODM <span style="color:var(--red)">TRACKER</span><small>PLAYER PERFORMANCE CENTER</small></div></div><div id="headerProfile" class="profile hidden"><div class="profileicon">C</div><div><strong id="headerName">Player</strong><small>Local demo profile</small></div><button class="secondary" id="changeName">Change</button></div></header>
-<main>
-<div class="eyebrow">GLOBAL VERSION / PLAYER ANALYTICS</div>
-<div class="hero"><div><h1>YOUR GAME.<br><span>YOUR NUMBERS.</span></h1><p>A dark esports dashboard for Call of Duty: Mobile Multiplayer and Battle Royale.</p></div></div>
-<section class="panel" id="loginPanel"><h2>Enter your CODM in-game name</h2><p class="muted">Looks up the public profile fields supported by an unofficial CODM Global profile API.</p><form id="nameForm" class="formrow"><input id="codmName" class="field" maxlength="40" autocomplete="nickname" placeholder="Your CODM username" required><button type="submit" id="lookupButton">Find player</button></form><p class="muted" style="margin-bottom:0">No password needed. Never enter your Activision password or verification codes here.</p><p id="status" class="muted" role="status" aria-live="polite"></p></section>
-<section class="panel hidden" id="playerPanel"><div class="profile"><div class="profileicon">C</div><div><h2 id="playerTitle" style="margin:0 0 4px">Player</h2><p class="muted" style="margin:0">CODM Global · public profile lookup</p></div></div></section>
-<div class="notice"><strong>What this can show:</strong> this unofficial API documents player level, MP rank, MP rating, country and nickname. It does not provide verified full MP lifetime stats or BR stats through this endpoint. Results may fail or be outdated if the service changes.</div>
-<section class="grid" aria-label="Player profile details">
-<div class="card"><div class="label">PLAYER LEVEL</div><div class="value cyan" id="level">—</div><div class="sub">From profile lookup</div></div>
-<div class="card"><div class="label">MP RANK</div><div class="value" id="mpRank">—</div><div class="sub">From profile lookup</div></div>
-<div class="card"><div class="label">MP RATING</div><div class="value red" id="rating">—</div><div class="sub">From profile lookup</div></div>
-<div class="card"><div class="label">COUNTRY</div><div class="value" id="country">—</div><div class="sub">From profile lookup</div></div>
-</section>
-<div class="twocol"><div class="card"><div class="sect"><h3>Multiplayer stats</h3><span class="tag">NOT PROVIDED</span></div><p class="muted">This API endpoint does not document K/D, win rate, total kills or match history. These will stay unavailable rather than showing made-up numbers.</p></div><div class="card"><div class="sect"><h3>Battle Royale stats</h3><span class="tag">NOT PROVIDED</span></div><p class="muted">BR stats are not available from this profile endpoint.</p></div></div>
-<div class="card" style="margin-top:14px"><div class="sect"><h3>Profile response</h3><span class="tag" id="sourceStatus">WAITING FOR LOOKUP</span></div><p class="muted" id="profileMessage">Enter your exact in-game nickname to try a profile lookup.</p><p class="muted">Data source: unofficial community API. It is not affiliated with Activision and may stop working.</p></div>
-<footer>Independent fan-made project. Not affiliated with Activision or Call of Duty.<br>Your display name is saved locally in this browser only. Profile data depends on an unofficial API.</footer>
-</main>
+<div class="wrap">
+  <header class="top">
+    <div class="mark">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="#ff6a1a" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="#ff6a1a"/><path d="M16 1v8M16 23v8M1 16h8M23 16h8" stroke="#ebe8dc" stroke-width="2"/></svg>
+      CODM <b>TRACKER</b>
+    </div>
+    <div class="live"><i></i>GLOBAL SERVERS</div>
+  </header>
+
+  <section class="hero">
+    <div class="tagline">Operator lookup</div>
+    <h1>Find any<br><span class="o">operator.</span> <span class="h">Fast.</span></h1>
+    <p class="lede">Type a Call of Duty: Mobile Global nickname or player UID to pull up their level, Multiplayer rank and rating.</p>
+
+    <form class="search" id="form" autocomplete="off">
+      <span class="prompt">&gt;_</span>
+      <input id="q" maxlength="40" placeholder="nickname or UID" aria-label="Nickname or UID" required>
+      <button id="go" type="submit">Scan</button>
+    </form>
+    <div class="hint"><span>Nickname must match exactly, including symbols. No password needed, ever.</span><div class="recent" id="recent"></div></div>
+  </section>
+
+  <div class="state" id="state" role="status" aria-live="polite"></div>
+
+  <section class="dossier" id="dossier" aria-label="Player profile">
+    <div class="frame">
+      <div class="ribbon"><span>OPERATOR FILE</span><span class="ok">● PROFILE VERIFIED</span></div>
+      <div class="id">
+        <div class="avatar" id="avatar"></div>
+        <div class="who">
+          <small>CALLSIGN</small>
+          <h2 id="name"></h2>
+          <div class="meta">
+            <button class="pill" id="uid" type="button" title="Copy UID"></button>
+            <span class="pill" id="country"></span>
+          </div>
+        </div>
+        <div class="badge"><img id="rankIcon" alt=""><div class="pill" id="rankLabel" style="border:0"></div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">PLAYER LEVEL</div><div class="v" id="level"></div></div>
+        <div class="stat"><div class="k">MP RANK</div><div class="v" id="rank"></div></div>
+        <div class="stat"><div class="k">MP RATING</div><div class="v hot" id="rating"></div></div>
+      </div>
+      <div class="ladder">
+        <div class="k">RANKED LADDER</div>
+        <div class="tiers" id="tiers"></div>
+      </div>
+    </div>
+    <div class="limits">
+      <div class="limit"><b>Not shown: K/D, wins, match history</b>The public profile source only shares level, rank and rating. Rather than make numbers up, they're left out.</div>
+      <div class="limit"><b>Battle Royale</b>BR rank and stats aren't available from this source either.</div>
+    </div>
+  </section>
+
+  <footer>Fan-made and unofficial. Not affiliated with Activision or Call of Duty. Profile data comes from a public game top-up lookup and may change without notice. Recent searches are stored only in your browser.</footer>
+</div>
+
 <script>
-const form=document.getElementById("nameForm"),input=document.getElementById("codmName");
-const statusEl=document.getElementById("status"),button=document.getElementById("lookupButton");
-function showStatus(message){statusEl.textContent=message}
-function setPlayerName(name){document.getElementById("playerTitle").textContent=name;document.getElementById("headerName").textContent=name;document.getElementById("headerProfile").classList.remove("hidden");document.getElementById("loginPanel").classList.add("hidden");document.getElementById("playerPanel").classList.remove("hidden");try{localStorage.setItem("codmTrackerDisplayName",name)}catch(e){}}
-function setField(id,value){document.getElementById(id).textContent=(value===undefined||value===null||value==="")?"Unavailable":String(value)}
-async function lookupPlayer(name){
-  button.disabled=true;button.textContent="Looking up…";showStatus("Checking the public profile service…");
-  document.getElementById("sourceStatus").textContent="LOOKUP IN PROGRESS";
-  document.getElementById("profileMessage").textContent="Waiting for the API response…";
-  ["level","mpRank","rating","country"].forEach(id=>setField(id,null));
-  try{
-    // Netlify Function proxies the request so the browser does not depend on the API's CORS settings.
-    const response=await fetch(`/.netlify/functions/codm?name=${encodeURIComponent(name)}`);
-    const payload=await response.json();
-    if(!response.ok) throw new Error(payload.error||`Request failed (${response.status})`);
-    if(payload.success===false||!payload.data) throw new Error(payload.message||"Player not found or the API returned no profile.");
-    const d=payload.data;
-    setPlayerName(d.nickname||name);
-    setField("level",d.level);
-    setField("mpRank",d.customReadableMpRank);
-    setField("rating",d.rating);
-    setField("country",d.country);
-    document.getElementById("sourceStatus").textContent="PROFILE RECEIVED";
-    document.getElementById("profileMessage").textContent="Profile data received from the unofficial API. This is a profile lookup, not a live match feed.";
-    showStatus("Profile found. Full MP/BR statistics are not supplied by this endpoint.");
-  }catch(err){
-    document.getElementById("sourceStatus").textContent="LOOKUP FAILED";
-    document.getElementById("profileMessage").textContent="Could not load a profile: "+(err.message||"unknown error")+". Check the nickname and try again later.";
-    showStatus("Lookup failed. If this site is not deployed with the Netlify Function, the API connection will not work.");
-  }finally{button.disabled=false;button.textContent="Find player"}
+const $=id=>document.getElementById(id);
+const TIERS=["Rookie","Veteran","Elite","Pro","Master","Grand Master","Legendary"];
+const KEY="codmRecent";
+const regionNames=(()=>{try{return new Intl.DisplayNames(["en"],{type:"region"})}catch{return null}})();
+
+function flag(cc){return cc&&/^[A-Z]{2}$/.test(cc)?String.fromCodePoint(...[...cc].map(c=>127397+c.charCodeAt(0))):""}
+function show(el,on){el.classList.toggle("show",on)}
+function setState(html,err){const s=$("state");s.innerHTML=html;s.classList.toggle("err",!!err);show(s,!!html)}
+
+function getRecent(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
+function addRecent(n){try{localStorage.setItem(KEY,JSON.stringify([n,...getRecent().filter(x=>x.toLowerCase()!==n.toLowerCase())].slice(0,5)))}catch{}renderRecent()}
+function renderRecent(){
+  const r=$("recent");r.innerHTML="";
+  getRecent().forEach(n=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=n;b.onclick=()=>{$("q").value=n;lookup(n)};r.append(b)});
 }
-form.addEventListener("submit",e=>{e.preventDefault();const name=input.value.trim();if(name)lookupPlayer(name)});
-document.getElementById("changeName").addEventListener("click",()=>{document.getElementById("loginPanel").classList.remove("hidden");document.getElementById("playerPanel").classList.add("hidden");input.value=document.getElementById("headerName").textContent;document.getElementById("headerProfile").classList.add("hidden")});
-try{const saved=localStorage.getItem("codmTrackerDisplayName");if(saved){input.value=saved;lookupPlayer(saved)}}catch(e){}
+
+function tierIndex(rank){
+  if(!rank)return-1;
+  const base=rank.replace(/\s+[IVX]+$/,"").replace(/\s+/g,"").toLowerCase();
+  return TIERS.findIndex(t=>t.replace(/\s+/g,"").toLowerCase()===base);
+}
+
+function render(p){
+  $("name").textContent=p.nickname||"Unknown";
+  const av=$("avatar");
+  av.textContent=p.avatar?"":(p.nickname||"?").trim().charAt(0).toUpperCase();
+  av.style.backgroundImage=p.avatar?`url("${p.avatar.replace(/"/g,"")}")`:"none";
+
+  const uid=$("uid");
+  uid.textContent=p.uid?`UID ${p.uid}`:"UID unavailable";
+  uid.disabled=!p.uid;
+  uid.onclick=()=>{if(!p.uid)return;navigator.clipboard?.writeText(p.uid).then(()=>{uid.textContent="Copied ✓";setTimeout(()=>uid.textContent=`UID ${p.uid}`,1200)})};
+
+  const cn=p.country?(regionNames?.of(p.country)||p.country):"Unknown region";
+  $("country").textContent=`${flag(p.country)} ${cn}`.trim();
+
+  $("level").innerHTML="";
+  if(p.levelIcon){const i=new Image();i.src=p.levelIcon;i.alt="";$("level").append(i)}
+  $("level").append(p.level??"—");
+  $("rank").textContent=p.rank||"Unranked";
+  $("rating").textContent=p.rating!=null?Number(p.rating).toLocaleString():"—";
+
+  const ri=$("rankIcon");
+  if(p.rankIcon){ri.src=p.rankIcon;ri.alt=p.rank||"";ri.style.display=""}else ri.style.display="none";
+  $("rankLabel").textContent=p.rank||"";
+
+  const idx=tierIndex(p.rank);
+  $("tiers").innerHTML=TIERS.map((t,i)=>`<div class="tier ${i<idx?"past":""} ${i===idx?"now":""}">${t}</div>`).join("");
+
+  show($("dossier"),false);void $("dossier").offsetWidth;show($("dossier"),true);
+}
+
+async function lookup(q){
+  const go=$("go");go.disabled=true;go.textContent="Scanning";
+  show($("dossier"),false);
+  setState(`Scanning Global servers for <b style="color:var(--ink)">${q.replace(/[<>&]/g,"")}</b>…<div class="scan"></div>`);
+  try{
+    const res=await fetch(`/api/player?q=${encodeURIComponent(q)}`);
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok)throw new Error(data.error||`Request failed (${res.status})`);
+    setState("");render(data);addRecent(data.nickname||q);
+  }catch(e){
+    setState(`<b>Lookup failed.</b> ${(e.message||"Unknown error").replace(/[<>&]/g,"")}`,true);
+  }finally{go.disabled=false;go.textContent="Scan"}
+}
+
+$("form").addEventListener("submit",e=>{e.preventDefault();const q=$("q").value.trim();if(q)lookup(q)});
+renderRecent();
 </script>
 </body>
 </html>
